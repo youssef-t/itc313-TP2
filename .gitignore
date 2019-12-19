@@ -2,4 +2,5 @@
 *.o
 *.d
 *-test
-
+a.out
+test.cpp

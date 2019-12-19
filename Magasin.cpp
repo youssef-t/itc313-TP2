@@ -4,21 +4,21 @@ Magasin::Magasin(){
 
 }
 
-Magasin::Magasin(std::vector <Product*> products, std::vector <Client*> clients, std::vector <order*> orders):
+/*Magasin::Magasin(std::vector <Product*> products, std::vector <Client*> clients, std::vector <order*> orders):
 m_products(products), m_clients(clients), m_orders(orders){
+}*/
+
+//Ajout produit, client, ordre
+void Magasin::addProduct(Product& product){
+m_products.push_back() = &product;
 }
 
-//setters
-void Magasin::setProducts(std::vector<Products*>& products){
-m_products = products;
+void Magasin::addClient(Client& client){
+m_clients.push_back() = &client;
 }
 
-void Magasin::setClients(std::vector<Client*>& clients){
-m_clients = clients;
-}
-
-void Magasin::setOrders(std::vector<Order*>& orders){
-m_orders = orders;
+void Magasin::addOrder(Order& order){
+m_orders.push_back() = &order;
 }
 
 //getters
@@ -34,32 +34,24 @@ std::vector<Order*> Magasin::getOrders()const{
     return m_orders;
 }
 
-//méthode ajout d'un produit
-void Product::addProduct(Produit& produit){
-    m_products.push_back(produit);
-}
-
 //méthode affichage de tous les produits
 void Product::displayProducts(){
-    for(int i=0; i < 100; i++)
-        std::cout << "---" ;
+    tiretTableau();
 
     std::cout<< "\n| Products" ;
     
-    for(i=0 ; i < 90;i++)  // 100 - strlen("| Products")
-        std::cout<< "   ";
+    espace(100-10); // 100 - strlen("| Products")
+
     std::cout<<"|"<< std::endl;
     
     std::cout<< "|";
-    for(int i=0; i < 100; i++)
-        std::cout << "---" ;
+    tiretTableau();
     std:cout<< "|" << std::endl;
 
     std::cout<< "| Name \t\t Description \t\t\tQuantity\t\tPrice \t |" << std::endl
 
     std::cout<< "|";
-    for(int i=0; i < 100; i++)
-        std::cout << "---" ;
+    tiretTableau();
     std:cout<< "|" << std::endl;
 
     //Affichage des produits
@@ -67,24 +59,20 @@ void Product::displayProducts(){
         std::cout<<"| "<< *(m_products.at(i))<<"\t |\n";
 
     //Afficher la dernière ligne
-    for(int i=0; i < 100; i++)
-        std::cout << "---" ;
+    tiretTableau();
     std:cout<< "|" << std::endl;
 }
 
 //méthode affichage d'un produit indiqué par son nom
 void Product::displayProduct(std::string& produit){
-for(int i=0; i < 100; i++)
-    std::cout << "---" ;
+tiretTableau();
 
 std::cout << "\n Details of a product"
-for(int i=0; i < 100-21 ;i++)
-    std::cout <<"   ";
+espace(100-21);
 std::cout << "|";
 
 std::cout <<"\n|"
-for(int i=0; i < 100; i++)
-    std::cout << "---" ;
+tiretTableau();
 std::cout<< "|";
 
 std::cout<<"\n| " ;
@@ -93,13 +81,31 @@ for(i=0;i<m_products.size()<i++)
         std::cout << *(m_products.at(i)) << "\t |\n";
 
 //Afficher la dernière ligne
-for(int i=0; i < 100; i++)
-    std::cout << "---" ;
-    std:cout<< "|" << std::endl;
+tiretTableau();
+std:cout<< "|" << std::endl;
 }
 
 //méthode mise à jour de la quantité d'un produit en indiquant son nom
 void Product::updateQuantite(std::string& nom_produit,int& quantite){
     if(*(m_products.at(i)).getTitre() == produit)
             *(m_products.at(i)).setQuantite(quantite);
+};
+
+
+
+void Product::espace(int nbr_tiret){
+    for(int i=0;i<nbr_tiret;i++)
+        std::cout<<" ";
+    std::cout<<"\n";
+}
+
+void Product::tiretTableau(int nbr_tiret){
+    for(int i=0; i < nbr_tiret ; i++)
+        std::cout<<"-";
+}
+
+void Product::tiretTableau(){
+    for(int i=0; i < 100;i++)
+        std::cout<<"-";
+    std::cout<<"\n"
 }
