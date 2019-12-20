@@ -37,6 +37,6 @@ void Product::setPrix(double& prix){
 }
 
 std::ostream& operator<< (std::ostream& output, Product& produit){
-    output<< produit.getTitre() << "\t\t" << produit.getDescription() << "\t\t(" << produit.getQuantite()<<")\t\t"<< produit.getPrix()<<" $";
+    output<< produit.getTitre() << "\t\t" << produit.getDescription() << "\t\t(x" << produit.getQuantite()<<")\t\t"<< produit.getPrix()<<" $";
     return output;
 }

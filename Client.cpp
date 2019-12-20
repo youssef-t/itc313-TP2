@@ -46,10 +46,11 @@
 
     //Surcharge d'opérateur
     std::ostream& operator<< (std::ostream& output, Client& client){
-    output << "(" << client.getId() << ") "<< client.getNom() << "\t" << client.getPrenom();
+    output << "ID(" << client.getId() << ") "<< client.getPrenom() << "\t" << client.getNom();
     output << "\n \tPanier:" ;
     for(int i=0 ; i< (int)client.m_panier.size();i++)
-        output << "\n \t" << client.m_panier.at(i) ;
+        output << "\n \t\t" << client.m_panier.at(i) ;
+    output << "\n";
 
     return output;
     }
