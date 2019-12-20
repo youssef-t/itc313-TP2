@@ -18,7 +18,7 @@ double Product::getPrix() const {return m_prix;}
 //setters
 void Product::setTitre(std::string& titre){ m_titre = titre;}
 void Product::setDescription(std::string& description){ m_description= description;}
-void Product::setQuantite(int& quantite){ 
+void Product::setQuantite(int quantite){ 
     if(quantite > 0 || quantite ==0)
         m_quantite = quantite;
     else {

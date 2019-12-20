@@ -16,7 +16,7 @@ public:
 //setters
     void setTitre(std::string& titre);
     void setDescription(std::string& description);
-    void setQuantite(int& quantite);
+    void setQuantite(int quantite);
     void setPrix(double& prix);
     
     //operator

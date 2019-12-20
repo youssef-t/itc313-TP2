@@ -1,5 +1,6 @@
 # itc313-TP2
 Classe Produit faite
-Classe Magasin et Client en cours
+Classe Client faite
+Classe Commande faite
 
-Vérification de std::vector<type*> (affectation)
+

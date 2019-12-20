@@ -31,6 +31,5 @@ int main(){
     clientA.deleteProduct(ps3);
     std::cout << clientA;
 
-
     return 0;
 }
