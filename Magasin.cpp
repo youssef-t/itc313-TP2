@@ -1,12 +1,31 @@
 #include "Magasin.h"
+
 //constructor
 Magasin::Magasin(){
 
+//Si on veut initialiser la taille des vecteurs pour des fins de performances
+/*m_products.reserve(5*sizeof(Product));
+m_clients.reserve(5*sizeof(Client));
+m_orders.reserve(5*sizeof(Order)); */
+m_products = nullptr;
+m_clients = nullptr;
+m_orders = nullptr;
+
 }
 
-/*Magasin::Magasin(std::vector <Product*> products, std::vector <Client*> clients, std::vector <order*> orders):
-m_products(products), m_clients(clients), m_orders(orders){
-}*/
+Magasin::Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <order> orders){
+    m_products.reserve(sizeof(Product)*products.size())); //allocation de mémoire pour raison de performances
+    for(int i=0; i< products.size();i++)
+        m_products.push_back(&(m_products.at(i)));
+    
+    m_clients.reserve(sizeof(Client)*clients.size()));
+    for(int i=0; i< clients.size();i++)
+        m_clients.push_back(&(clients.at(i)));
+    
+    m_products.reserve(sizeof(Product)*orders.size()));
+    for(int i=0; i< orders.size();i++)
+        m_orders.push_back(&(orders.at(i))); 
+}
 
 //Ajout produit, client, ordre
 void Magasin::addProduct(Product& product){
@@ -87,9 +106,11 @@ std:cout<< "|" << std::endl;
 
 //méthode mise à jour de la quantité d'un produit en indiquant son nom
 void Product::updateQuantite(std::string& nom_produit,int& quantite){
-    if(*(m_products.at(i)).getTitre() == produit)
+for(i=0; i < m_products.size() ; i++)
+    if(*(m_products.at(i)).getTitre() == produit){
             *(m_products.at(i)).setQuantite(quantite);
-};
+        break ; }
+}
 
 
 

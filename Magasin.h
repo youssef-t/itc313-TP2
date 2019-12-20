@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
 #include "Produit.h"
+#include "Client.h"
+
 class Magasin {
 public:
 	//constractor
 	Magasin();
-	//Magasin(std::vector <Product*> products, std::vector <Client*> clients, std::vector <order*> orders);
+	Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <order> orders);
 
 	/*//getters
 	std::vector<Product*> getProducts()const;
