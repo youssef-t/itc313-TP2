@@ -15,16 +15,16 @@ public:
     std::vector<Product> getPanier() const;
 
     //Ajouter un produit au panier d'achat
-    void addProduct(Product& produit);
+    void addProduct(Product produit);
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
-    void updateQuantity(Product& produit,int quantite);
+    void updateQuantity(Product produit,int quantite);
 
     //Vider le panier
     void viderPanier();
 
     //Supprimer un produit du panier d'achat
-    void deleteProduct(Product& product);
+    void deleteProduct(Product product);
 
     //Surcharge d'opérateur
     friend std::ostream& operator<< (std::ostream& output, Client& client);

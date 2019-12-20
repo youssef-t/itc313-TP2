@@ -16,12 +16,12 @@
     std::vector<Product> Client::getPanier() const{return m_panier;}
 
     //Ajouter un produit au panier d'achat
-    void Client::addProduct(Product& produit){
+    void Client::addProduct(Product produit){
     m_panier.push_back(produit);
     }
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
-    void Client::updateQuantity(Product& produit,int quantite){
+    void Client::updateQuantity(Product produit,int quantite){
     for(int i =0 ; i< (int)m_panier.size() ; i++)
         if( m_panier.at(i).getTitre() == produit.getTitre()){
             m_panier.at(i).setQuantite(quantite);
@@ -35,7 +35,7 @@
     }
 
     //Supprimer un produit du panier d'achat
-    void Client::deleteProduct(Product& product){
+    void Client::deleteProduct(Product product){
     for(int i=0; i< (int)m_panier.size(); i++)
         if( (m_panier.at(i)).getTitre() == product.getTitre()){
             m_panier.erase(m_panier.begin()+i);
