@@ -34,6 +34,6 @@ private:
 	std::vector <Client* > m_clients;
 	std::vector <Order* > m_orders;
 	void tiretTableau(int nbr_tiret);
-	void tiretTableau(); //valeur par défaut 100 tiret -
-	void espace(int nbr_espace);
+	//void tiretTableau(); //valeur par défaut 100 tiret -
+	//void espace(int nbr_espace);
 };

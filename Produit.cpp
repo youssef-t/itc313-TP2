@@ -23,10 +23,10 @@ void Product::setQuantite(int quantite){
         m_quantite = quantite;
     else {
         m_quantite = 0;
-        std::cout << "La valeur par défaut de la quantité du produit " << getTitre() << " est 0.\n"; 
+        std::cout << "La valeur par défaut de la quantité du produit " << getTitre() << " est 0.\n";
     }
 }
-void Product::setPrix(double& prix){
+void Product::setPrix(double prix){
     while (prix < 0 || prix ==0){
         std::cout<<"Veuillez insérer un prix valide "<<std::endl;
         std::cin>>prix;
@@ -36,7 +36,25 @@ void Product::setPrix(double& prix){
 
 }
 
+
+//il est possible de ne pas utiliser les getters puisque l'opérateur est déclaré comme friend
 std::ostream& operator<< (std::ostream& output, Product& produit){
-    output<< produit.getTitre() << "\t\t" << produit.getDescription() << "\t\t(x" << produit.getQuantite()<<")\t\t"<< produit.getPrix()<<" $";
+    output <<"\t" << produit.getTitre();
+    nEspace(output, produit.getTitre().length() , 15);
+
+    output << produit.getDescription();
+    nEspace(output, produit.getDescription().length(), 30);
+
+    output << "(x" << produit.getQuantite()<<")" ;
+    nEspace(output, std::to_string(produit.m_quantite).length(), 10) ;
+
+    output << produit.getPrix() << " $\n";
+        
     return output;
 }
+
+
+void nEspace(std::ostream& output, int taille_chaine_caractere, int taille_champ){
+    for(int i = 0 ; i < taille_champ - taille_chaine_caractere; i++)
+        output << " ";
+    }
