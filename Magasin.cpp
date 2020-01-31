@@ -97,3 +97,141 @@ for(auto& i : m_products )
 std::cout << std::endl; 
 }
 
+void Magasin::addClient(std::string nom, std::string prenom){
+    Client* client = new Client(nom,prenom);
+    m_clients.push_back(client);
+}
+
+
+void Magasin::displayClients(){
+    std::cout << "\nClients\n";
+    std::cout << "Uid" ;
+    //on peut utiliser des tabulations
+    //Cette méthode reste mieux dans le cas où les Uid des clients comportent un nombre différent de chiffres
+    for(int i = 0 ; i < 10 - 3; i++)  //taille du champ total est 10 et la taille de Uid est 3
+        std::cout << " ";
+    std::cout << "Identity\n";
+
+    for(auto& i:m_clients){
+        std::cout << i->getId() << std::endl;
+        for(int j = 0 ; j < (int)std::to_string(i->getId()).length() - 3; j++)   
+            std::cout << " ";
+        std::cout << i->getPrenom() << " " << i->getNom() << std::endl ;
+    }
+    std::cout << std::endl;
+    
+}
+
+void Magasin::displayClient(std::string prenom, std::string nom){
+    for(auto& i : m_clients){
+        if( i -> getPrenom() == prenom || i->getNom() == nom){
+            std::cout << "\tAffichage du client\n";
+            std::cout << "Uid" ;
+            for(int i = 0 ; i < 10 - 3; i++)  //taille du champ total est 10 et la taille de Uid est 3
+                std::cout << " ";
+            std::cout << "Identity\n";
+            std::cout << i->getId() << std::endl;
+
+            for(int j = 0 ; j < (int)std::to_string(i->getId()).length() - 3; j++)   
+                std::cout << " ";
+             std::cout << i->getPrenom() << " " << i->getNom() << std::endl ;
+
+            break; //puisque le client a déjà été trouvé
+        }
+    }
+}
+
+void Magasin::displayClient(int id){
+    for(auto& i : m_clients){
+        if ( i -> getId() == id){
+            std::cout << "\tAffichage du client\n";
+            std::cout << "Uid" ;
+            for(int j = 0 ; j < 10 - 3; j++)  //taille du champ total est 10 et la taille de Uid est 3
+                std::cout << " ";
+            std::cout << "Identity\n";
+            std::cout << i->getId() << std::endl;
+
+            for(int j = 0 ; j < (int)std::to_string(i->getId()).length() - 3; j++)   
+                std::cout << " ";
+             std::cout << i->getPrenom() << " " << i->getNom() << std::endl ;
+            break; //puisque le client a déjà été trouvé
+        }
+    }
+}
+
+void Magasin::addProductToShoppingCart(std::string titre, std::string prenom, std::string nom){
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getPrenom() == prenom || j -> getNom() == nom ){
+                    j -> addProduct(*i); //le produit d'origine ne sera pas modifié
+                                        //une copie du produit sera ajoutée au panier
+                    break;//deuxième boucle for
+                }
+            break;
+        }
+}
+
+
+void Magasin::addProductToShoppingCart(std::string titre, int id ){
+    //On procède presque de la même manière de la méthode précédente
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getId() == id){
+                    j -> addProduct(*i); //le produit d'origine ne sera pas modifié
+                                        //une copie du produit sera ajoutée au panier
+                    break;//deuxième boucle for               
+                }  
+             break; //première boucle for
+        }
+}
+
+void Magasin::deleteProductClient(std::string titre, std::string prenom, std::string nom){
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getPrenom() == prenom || j -> getNom() == nom){
+                    j -> deleteProduct(titre);
+                    break;               
+                }
+            break;}
+}
+
+void Magasin::deleteProductClient(std::string titre, int id){
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getId() == id ){
+                    j -> deleteProduct(titre);
+                    break;
+                }
+            break;
+        }
+}
+
+void Magasin::updateProductQuantityClient(std::string titre, int quantite, int id){
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getId() == id ){
+                    j->updateQuantity(titre, quantite);
+                    break;
+                }
+            break;
+        }
+}
+
+void Magasin::updateProductQuantityClient(std::string titre, int quantite, std::string prenom, std::string nom){
+    for(auto& i : m_products)
+        if( i->getTitre() == titre){
+            for(auto& j : m_clients)
+                if( j-> getPrenom() == prenom || j -> getNom() == nom){
+                    j->updateQuantity(titre, quantite);
+                    break;
+                }
+            break;
+        }  
+}
+
+

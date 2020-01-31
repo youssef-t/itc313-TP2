@@ -6,7 +6,9 @@
 class Client{
 public:
     Client();
-    Client(std::string prenom, std::string nom, std::vector<Product>& panier);
+    Client(std::string prenom, std::string nom, std::vector<Product> panier);
+    Client(std::string prenom, std::string nom) ; //on peut pas passer une valeur par défaut 
+                                                  //au dernier paramètre du deuxième constructeur
 
     //getters
     std::string getNom() const;
@@ -19,12 +21,14 @@ public:
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
     void updateQuantity(Product produit,int quantite);
+    void updateQuantity(std::string titre, int quantite);
 
     //Vider le panier
     void viderPanier();
 
     //Supprimer un produit du panier d'achat
     void deleteProduct(Product product);
+    void deleteProduct(std::string titre);
 
     //Surcharge d'opérateur
     friend std::ostream& operator<< (std::ostream& output, Client& client);

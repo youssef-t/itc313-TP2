@@ -4,10 +4,15 @@
         m_id = identifiant_auto_int();
     }
 
-    Client::Client(std::string prenom, std::string nom, std::vector<Product>& panier): m_prenom(prenom),
+    Client::Client(std::string prenom, std::string nom, std::vector<Product> panier): m_prenom(prenom),
         m_nom(nom), m_panier(panier){
         m_id = identifiant_auto_int();
     }
+
+    Client::Client(std::string prenom, std::string nom) :
+        m_prenom(prenom), m_nom(nom){
+                    m_id = identifiant_auto_int();
+        }
 
     //getters
     std::string Client::getNom() const{ return m_nom;}
@@ -17,30 +22,51 @@
 
     //Ajouter un produit au panier d'achat
     void Client::addProduct(Product produit){
-    m_panier.push_back(produit);
+        //on a une copie du produit, le produit d'origine ne sera pas modifié
+        //par défaut, le client prend un seul produit
+        produit.setQuantite(1);
+        m_panier.push_back(produit);
     }
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
     void Client::updateQuantity(Product produit,int quantite){
-    for(int i =0 ; i< (int)m_panier.size() ; i++)
-        if( m_panier.at(i).getTitre() == produit.getTitre()){
-            m_panier.at(i).setQuantite(quantite);
-            break;
-        }
+        //on peut utiliser une boucle "Range" au lieu d'une boucle classique
+        for(int i =0 ; i< (int)m_panier.size() ; i++)
+            if( m_panier.at(i).getTitre() == produit.getTitre()){
+                m_panier.at(i).setQuantite(quantite);
+                break;
+            }
+    }
+
+    void Client::updateQuantity(std::string titre, int quantite){
+        for(auto& i : m_panier)
+            if( i.getTitre() == titre){
+                i.setQuantite(quantite);
+                break;
+            }
     }
 
     //Vider le panier
     void Client::viderPanier(){
-    m_panier.erase(m_panier.begin(), m_panier.end()); //suppression de la 1ère case jusqu'à la dernière
+        m_panier.erase(m_panier.begin(), m_panier.end()); //suppression de la 1ère case jusqu'à la dernière
     }
 
     //Supprimer un produit du panier d'achat
     void Client::deleteProduct(Product product){
-    for(int i=0; i< (int)m_panier.size(); i++)
-        if( (m_panier.at(i)).getTitre() == product.getTitre()){
-            m_panier.erase(m_panier.begin()+i);
-            break;
-        }
+        for(int i=0; i< (int)m_panier.size(); i++)
+            if( (m_panier.at(i)).getTitre() == product.getTitre()){
+                m_panier.erase(m_panier.begin()+i);
+                break;
+            }
+    }
+    
+    void Client::deleteProduct(std::string titre){
+        for(int i=0; i< (int)m_panier.size(); i++)
+            if( (m_panier.at(i)).getTitre() == titre){
+                m_panier.erase(m_panier.begin()+i);
+                break;
+            }
+            
     }
 
 
@@ -59,6 +85,6 @@
     int Client::identifiant_auto_int(){
         static int index=0;
 	    index++ ;
-	    return index-1;
+	    return index;
     }
 
