@@ -5,8 +5,13 @@
         m_id = identifiant_auto_int();
     }
 
-    Commande::Commande(Client client, std::vector<Product> produits, bool livraison): m_client(client),m_products(produits),m_livraison(livraison) {
+    Commande::Commande(Client client, std::vector<Product> produits, bool livraison): m_client(client),m_livraison(livraison) {
         m_id = identifiant_auto_int();
+        //valeur par défaut de la quantité de chaque produit dans le panier est 1
+        for(int i = 0; i < (int)produits.size() ; i++){
+            produits.at(i).setQuantite(1);
+            m_products.push_back(produits.at(i));
+        }
     }
 
 
@@ -14,11 +19,16 @@
     void Commande::setClient(Client& client){ m_client = client;}
 
     void Commande::setProduct(std::vector<Product> produits){
+    supprimerProduits();
     for(int i=0; i< (int)produits.size() ; i++)
         m_products.push_back(produits.at(i));
     }
     
     void Commande::setLivraison(bool livraison){ m_livraison = livraison;}
+
+    void Commande::supprimerProduits(){
+        m_products.erase(m_products.begin(), m_products.end()); //suppression de la 1ère case jusqu'à la dernière
+    }
 
 //getters
     Client Commande::getClient()const { return m_client;}

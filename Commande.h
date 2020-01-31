@@ -18,6 +18,8 @@ public:
     int getId() const;
     bool getLivraison() const;
 
+//supprimer les produits de la commande
+    void supprimerProduits();
 //Surcharge d'opérateur
     friend std::ostream& operator<< (std::ostream& output, Commande& commande);
 
