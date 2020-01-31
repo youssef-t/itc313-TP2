@@ -9,7 +9,7 @@ int main(){
 //lors de l'utilisation des vecteurs
 
 //on reserve de la mémoire
-    produits.reserve(3);
+   // produits.reserve(3);
 //emplace_back prend en paramètres les paramètres d'un constructeur
     produits.emplace_back("PS3","Console de jeu Sony",2,300);
     produits.emplace_back("MacBook Pro", "PC portable", 3, 999);
@@ -66,30 +66,33 @@ int main(){
         int help;
         std::cin >> help;
 
-        for(int i = 0; i < help ; i++){
-            std::cout << "Produit " << i+1 << " : \n" ;
-            std::cout << "\tLe titre du produit : ";
-            std::string titre;
-            std::cin >> titre;
+        if(help > 0) {
+            for(int i = 0; i < help ; i++){
+                std::cout << "Produit " << i+1 << " : \n" ;
+                std::cout << "\tLe titre du produit : ";
+                std::string titre;
+                std::cin >> titre;
             
-            std::cout << "\tLa description du produit : ";
-            std::string description;
-            std::cin >> description ;
+                std::cout << "\tLa description du produit : ";
+                std::string description;
+                std::cin >> description ;
 
-            std::cout << "\tLa quantité du produit  : ";
-            int quantite;
-            std::cin >> quantite;
+                std::cout << "\tLa quantité du produit  : ";
+                int quantite;
+                std::cin >> quantite;
 
-            std::cout << "\tLe prix du produit : ";
-            int prix;
-            std::cin >> prix;
+                std::cout << "\tLe prix du produit : ";
+                int prix;
+                std::cin >> prix;
 
-            easy_store.addProductToStore(titre, description, quantite, prix);
+                easy_store.addProductToStore(titre, description, quantite, prix);
+            }
         }
     std::cout<<"\nAffichage des produits du magasin : \n";
     easy_store.displayProducts();
     std::cout << std::endl;
     }
+
 
 
     return 0;

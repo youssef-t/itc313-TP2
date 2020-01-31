@@ -6,7 +6,7 @@ Magasin::Magasin(){
 }
 
 
-Magasin::Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <Commande> orders){
+Magasin::Magasin(std::vector <Product>& products, std::vector <Client>& clients, std::vector <Commande>& orders){
     m_products.reserve(products.size()); //allocation de mémoire pour raison de performances
     for(auto& i : products) // passage par réference pour ne pas faire de copie
         m_products.push_back(&i); // &i est équivalent à &(m_products.at(i)) dans le cas d'une boucle for normale 
@@ -18,13 +18,15 @@ Magasin::Magasin(std::vector <Product> products, std::vector <Client> clients, s
     m_orders.reserve(orders.size());
     for(auto& i : orders)
         m_orders.push_back(&i); 
+
 }
 
 //Constructeur qui prend en paramètre un vecteur de produit 
-Magasin::Magasin(std::vector <Product> products){
+Magasin::Magasin(std::vector <Product>& products){
     m_products.reserve(products.size()); 
     for(auto& i : products) 
         m_products.push_back(&i);
+
 }
 
 //Ajout produit, client, ordre
@@ -43,8 +45,8 @@ void Magasin::addOrder(Commande& order){
 
 //méthode mise à jour de la quantité d'un produit en indiquant son nom
 void Magasin::updateQuantite(std::string nom_produit,int quantite){
-    //on peut utiliser auto puisque le compilateur sait déjà le type de m_products
-    if(quantite >= 0)
+    //on peut utiliser auto& puisque le compilateur sait déjà le type de m_products
+    if(quantite >= 0){
         for(auto& i : m_products){
         //i est un pointeur, pour cela on utilise l'opérateur ->, sinon on peut utiliser *(i).
              if( i->getTitre() == nom_produit){
@@ -52,6 +54,7 @@ void Magasin::updateQuantite(std::string nom_produit,int quantite){
             break;
              }
         }
+    }
     else 
         std::cout << "Erreur : quantité saisie est inférieure à 0 .\n";
 }
@@ -82,15 +85,15 @@ void Magasin::displayProducts(){
         std::cout << " ";        
 
     std::cout << "Quantity";
-    for(int i = 0 ; i < 10 - 8; i++)  //taille du champ total est 10 et la taille de Quantity est 8
+    for(int i = 0 ; i < 12 - 8; i++)  //taille du champ total est 10 et la taille de Quantity est 8
         std::cout << " ";      
 
     std::cout << "Price\n";    
 
 //Affichage des produits
 for(auto& i : m_products )
-    std::cout << *i << std::endl;
-    
+   std::cout << *i << std::endl;
+
 std::cout << std::endl; 
 }
 

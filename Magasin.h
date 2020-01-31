@@ -8,9 +8,9 @@ class Magasin {
 public:
 	//constractor
 	Magasin();
-	Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <Commande> orders);
+	Magasin(std::vector <Product>& products, std::vector <Client>& clients, std::vector <Commande>& orders);
 	//On peut pas mettre des valeurs par défaut pour les deux autres paramètres, donc on déclare ce constructeur
-	Magasin(std::vector <Product> products);
+	Magasin(std::vector <Product>& products);
 	
 	//méthode ajout d'un produit
 	void addProduct(Product& produit);
