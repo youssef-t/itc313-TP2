@@ -39,16 +39,16 @@ void Product::setPrix(double prix){
 
 //il est possible de ne pas utiliser les getters puisque l'opérateur est déclaré comme friend
 std::ostream& operator<< (std::ostream& output, Product& produit){
-    output <<"\t" << produit.getTitre();
+    output << produit.getTitre();
     nEspace(output, produit.getTitre().length() , 15);
 
     output << produit.getDescription();
-    nEspace(output, produit.getDescription().length(), 30);
+    nEspace(output, produit.getDescription().length(), 40);
 
     output << "(x" << produit.getQuantite()<<")" ;
     nEspace(output, std::to_string(produit.m_quantite).length(), 10) ;
 
-    output << produit.getPrix() << " $\n";
+    output << produit.getPrix() << " $";
         
     return output;
 }

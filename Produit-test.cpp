@@ -1,8 +1,11 @@
 #include "Produit.h" //iostream est inclus dans Produit.h
 
 int main(){
-    Product produit("PS2","Console",2,300);
-    std::cout<< produit;
+    Product produit1("PS2","Console",2,300);
+    Product produit2("MacBook Pro", "PC portable", 3, 999);
+
+    std::cout<< produit1 << std::endl;
+    std::cout<< produit2 << std::endl;
 
     std::cout << "Voulez-vous saisir un produit ? Si oui, veuillez taper O/o. Sinon veuillez taper un autre caractère" << std::endl;
     char aide;

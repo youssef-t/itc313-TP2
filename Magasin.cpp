@@ -3,138 +3,94 @@
 //constructor
 Magasin::Magasin(){
 
-//Si on veut initialiser la taille des vecteurs pour des fins de performances
-/*m_products.reserve(5*sizeof(Product));
-m_clients.reserve(5*sizeof(Client));
-m_orders.reserve(5*sizeof(Order)); */
-m_products = nullptr;
-m_clients = nullptr;
-m_orders = nullptr;
-
 }
 
-Magasin::Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <order> orders){
-    m_products.reserve(sizeof(Product)*products.size())); //allocation de mémoire pour raison de performances
-    for(int i=0; i< products.size();i++)
-        m_products.push_back(&(m_products.at(i)));
+
+Magasin::Magasin(std::vector <Product> products, std::vector <Client> clients, std::vector <Commande> orders){
+    m_products.reserve(products.size()); //allocation de mémoire pour raison de performances
+    for(auto& i : products) // passage par réference pour ne pas faire de copie
+        m_products.push_back(&i); // &i est équivalent à &(m_products.at(i)) dans le cas d'une boucle for normale 
+
+    m_clients.reserve(clients.size());
+    for(auto& i : clients)
+        m_clients.push_back(&i);
     
-    m_clients.reserve(sizeof(Client)*clients.size()));
-    for(int i=0; i< clients.size();i++)
-        m_clients.push_back(&(clients.at(i)));
-    
-    m_products.reserve(sizeof(Product)*orders.size()));
-    for(int i=0; i< orders.size();i++)
-        m_orders.push_back(&(orders.at(i))); 
+    m_orders.reserve(orders.size());
+    for(auto& i : orders)
+        m_orders.push_back(&i); 
+}
+
+//Constructeur qui prend en paramètre un vecteur de produit 
+Magasin::Magasin(std::vector <Product> products){
+    m_products.reserve(products.size()); 
+    for(auto& i : products) 
+        m_products.push_back(&i);
 }
 
 //Ajout produit, client, ordre
 void Magasin::addProduct(Product& product){
-m_products.push_back() = &product;
+    m_products.push_back(&product) ;
 }
 
 void Magasin::addClient(Client& client){
-m_clients.push_back() = &client;
+    m_clients.push_back(&client) ;
 }
 
-void Magasin::addOrder(Order& order){
-m_orders.push_back() = &order;
+void Magasin::addOrder(Commande& order){
+    m_orders.push_back(&order) ;
 }
 
-//getters
-std::vector<Product*> Magasin::getProducts()const{
-    return m_products;
-}
-
-std::vector<Client*> Magasin::getClients()const{
-    return m_clients;
-}
-
-std::vector<Order*> Magasin::getOrders()const{
-    return m_orders;
-}
 
 //méthode mise à jour de la quantité d'un produit en indiquant son nom
-
-void Product::updateQuantite(std::string& nom_produit,int& quantite){
-for(i=0; i < m_products.size() ; i++)
-    if(*(m_products.at(i)).getTitre() == produit){
-            *(m_products.at(i)).setQuantite(quantite);
-        break ; }
+void Magasin::updateQuantite(std::string nom_produit,int quantite){
+    //on peut utiliser auto puisque le compilateur sait déjà le type de m_products
+    if(quantite >= 0)
+        for(auto& i : m_products){
+        //i est un pointeur, pour cela on utilise l'opérateur ->, sinon on peut utiliser *(i).
+             if( i->getTitre() == nom_produit){
+            i->setQuantite(quantite);
+            break;
+             }
+        }
+    else 
+        std::cout << "Erreur : quantité saisie est inférieure à 0 .\n";
 }
 
-void Product::displayProduct(std::string)
-
-
-//méthode affichage d'un produit indiqué par son nom
-/*void Product::displayProduct(std::string& produit){
-tiretTableau();
-
-std::cout << "\n Details of a product"
-espace(100-21);
-std::cout << "|";
-
-std::cout <<"\n|"
-tiretTableau();
-std::cout<< "|";
-
-std::cout<<"\n| " ;
-for(i=0;i<m_products.size()<i++)
-    if(*(m_products.at(i)).getTitre() == produit)
-        std::cout << *(m_products.at(i)) << "\t |\n";
-
-//Afficher la dernière ligne
-tiretTableau();
-std:cout<< "|" << std::endl;
-} */
-
-
-/*
-void Product::espace(int nbr_tiret){
-    for(int i=0;i<nbr_tiret;i++)
-        std::cout<<" ";
-    std::cout<<"\n";
+void Magasin::addProductToStore(std::string nom, std::string description, float prix, int quantite){
+    Product* produit = new Product(nom, description, prix, quantite);
+    m_products.push_back(produit);
 }
 
-void Product::tiretTableau(int nbr_tiret){
-    for(int i=0; i < nbr_tiret ; i++)
-        std::cout<<"-";
+void Magasin::displayProduct(std::string nom_produit){
+    for(auto& i : m_products)
+        if( i->getTitre() == nom_produit){
+            std::cout << "\nDetails of a product\n" ;
+            std::cout << *i << "\n";
+            break; //pour arrêter la boucle puisque le produit a déjà été trouvé
+        }
 }
 
-void Product::tiretTableau(){
-    for(int i=0; i < 100;i++)
-        std::cout<<"-";
-    std::cout<<"\n"
-} */
+void Magasin::displayProducts(){
+//Affichage du haut du tableau
+    std::cout << "\nProducts\n" ;
+    std::cout << "Name" ;
+    for(int i = 0 ; i < 15 - 4; i++)  //taille du champ total est 15 et la taille de Name est 4
+        std::cout << " ";
 
+    std::cout << "Description";
+    for(int i = 0 ; i < 40 - 11 ; i++)  //taille du champ total est 15 et la taille de Description est 11
+        std::cout << " ";        
 
+    std::cout << "Quantity";
+    for(int i = 0 ; i < 10 - 8; i++)  //taille du champ total est 10 et la taille de Quantity est 8
+        std::cout << " ";      
 
+    std::cout << "Price\n";    
 
-/*
-//méthode affichage de tous les produits
-void Product::displayProducts(){
-    tiretTableau();
-
-    std::cout<< "\n| Products" ;
+//Affichage des produits
+for(auto& i : m_products )
+    std::cout << *i << std::endl;
     
-    espace(100-10); // 100 - strlen("| Products")
+std::cout << std::endl; 
+}
 
-    std::cout<<"|"<< std::endl;
-    
-    std::cout<< "|";
-    tiretTableau();
-    std:cout<< "|" << std::endl;
-
-    std::cout<< "| Name \t\t Description \t\t\tQuantity\t\tPrice \t |" << std::endl
-
-    std::cout<< "|";
-    tiretTableau();
-    std:cout<< "|" << std::endl;
-
-    //Affichage des produits
-    for (int i=0; i < (int)m_products.size() ; i++ )
-        std::cout<<"| "<< *(m_products.at(i))<<"\t |\n";
-
-    //Afficher la dernière ligne
-    tiretTableau();
-    std:cout<< "|" << std::endl;
-}*/
