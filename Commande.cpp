@@ -15,7 +15,7 @@
 
     void Commande::setProduct(std::vector<Product> produits){
     for(int i=0; i< (int)produits.size() ; i++)
-        m_products.push_back( produits.at(i));
+        m_products.push_back(produits.at(i));
     }
     
     void Commande::setLivraison(bool livraison){ m_livraison = livraison;}
@@ -28,19 +28,21 @@
 
 //Surcharge d'opérateur
     std::ostream& operator<< (std::ostream& output, Commande& commande){
-    std::string livre ;
-    commande.m_livraison ? livre = "Livrée" : livre = "Pas livrée" ;
-    output<<"Commande n°" << commande.getId() <<"\t Statut: " << livre ;
-    output << "\n\t"<< "("<<commande.getClient().getId()<<")"<<commande.getClient().getNom() << "\t"<< commande.getClient().getPrenom()<<std::endl;
+    std::string status ;
+    commande.m_livraison ? status = "Livrée" : status = "Pas livrée" ;
+    output<<"Commande n°" << commande.getId() <<"\t Statut: " << status ;
+    output << "\n\t"<< "("<<commande.getClient().getId()<<")"<<commande.getClient().getNom() 
+            << "\t"<< commande.getClient().getPrenom()<<std::endl;
     for(int i=0; i < (int)commande.m_products.size(); i++)
         output<< "\t\t"<<commande.m_products.at(i)<<std::endl;
     output<<"\n";
-    return output;}
+    return output;
+    }
 
 
 int Commande::identifiant_auto_int(){
     static int index = 0;
     index++;
-    return index -1;
+    return index ;
     }
 

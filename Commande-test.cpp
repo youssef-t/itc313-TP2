@@ -4,9 +4,9 @@
 int main(){
     Product ps4("PS4","Console de jeu", 5 , 299);
     Product ps3("PS3","Console de jeu", 5 , 999);
-    Product ps2("PS2","Console de jeu", 5 , 79);
+    Product mac("MacBook Pro","PC portable", 5 , 79);
     
-    std::vector<Product> produits_commandes = {ps2,ps3,ps4};
+    std::vector<Product> produits_commandes = {mac,ps3,ps4};
     produits_commandes.at(0).setQuantite(1);
     produits_commandes.at(1).setQuantite(2);
     produits_commandes.at(2).setQuantite(1);
@@ -16,8 +16,6 @@ int main(){
     Commande commande(client, produits_commandes);
     
     std::cout<<commande;
-
-
 
     
     
