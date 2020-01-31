@@ -6,7 +6,7 @@
 class Client{
 public:
     Client();
-    Client(std::string prenom, std::string nom, std::vector<Product> panier);
+    Client(std::string prenom, std::string nom, std::vector<Product>& panier);
 
     //getters
     std::string getNom() const;

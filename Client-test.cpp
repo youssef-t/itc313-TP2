@@ -4,7 +4,7 @@
 int main(){
     Product ps4("PS4","Console de jeu", 5 , 299);
     Product ps3("PS3","Console de jeu", 5 , 999);
-    Product ps2("PS2","Console de jeu", 5 , 79);
+    Product mac("MacBook Pro","PC portable", 5 , 79);
 
     std::vector<Product> panierA = {ps4};
 
@@ -13,10 +13,10 @@ int main(){
     clientA.updateQuantity(ps3,1);
     clientA.updateQuantity(ps4,2);
 
-    std::vector<Product> panierB = {ps2,ps3};
+    std::vector<Product> panierB = {mac,ps3};
     Client clientB("Jean","Bernard",panierB);
     clientB.updateQuantity(ps3,2);
-    clientB.updateQuantity(ps2,1);
+    clientB.updateQuantity(mac,1);
 
 
     std::cout << clientA << clientB ;

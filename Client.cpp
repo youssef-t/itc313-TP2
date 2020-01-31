@@ -4,7 +4,7 @@
         m_id = identifiant_auto_int();
     }
 
-    Client::Client(std::string prenom, std::string nom, std::vector<Product> panier): m_prenom(prenom),
+    Client::Client(std::string prenom, std::string nom, std::vector<Product>& panier): m_prenom(prenom),
         m_nom(nom), m_panier(panier){
         m_id = identifiant_auto_int();
     }
