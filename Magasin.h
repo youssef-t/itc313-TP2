@@ -58,7 +58,10 @@ public:
 	bool validationCommande(int id);
 
 	//méthode mise à jour du statut de la commande
-	bool updateCommandeStatus(int id);
+	bool updateCommandeStatus(int id, bool status);
+
+	//méthode affichage des commandes passées
+	void affichageCommandePassees();
 
 private:
 	std::vector <Product* > m_products;

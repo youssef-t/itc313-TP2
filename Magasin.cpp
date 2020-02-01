@@ -334,3 +334,11 @@ bool Magasin::updateCommandeStatus(int id , bool status){
 
     return commande_trouvee ;   
 }
+
+//méthode affichage des commandes passées
+void Magasin::affichageCommandePassees(){
+    std::cout << "\t---Affichage des commandes passées---\n";
+    for(auto& i : m_orders) //on peut déclarer i comme Commande&
+        if(i->getLivraison()) //test si la commande est passée
+            std::cout << i << std::endl;
+}
