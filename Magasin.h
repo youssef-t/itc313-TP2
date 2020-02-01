@@ -63,6 +63,10 @@ public:
 	//méthode affichage des commandes passées
 	void affichageCommandePassees();
 
+	//méthode affichage des commandes d'un client donné
+	void affichageCommandesClient(int id);
+	void affichageCommandesClient(std::string prenom, std::string nom);
+
 private:
 	std::vector <Product* > m_products;
 	std::vector <Client* > m_clients;

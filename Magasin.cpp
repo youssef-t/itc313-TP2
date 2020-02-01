@@ -340,5 +340,21 @@ void Magasin::affichageCommandePassees(){
     std::cout << "\t---Affichage des commandes passées---\n";
     for(auto& i : m_orders) //on peut déclarer i comme Commande&
         if(i->getLivraison()) //test si la commande est passée
-            std::cout << i << std::endl;
+            std::cout << *i << std::endl;
+}
+
+//méthode affichage des commandes d'un client donné
+
+void Magasin::affichageCommandesClient(int id){
+    std::cout << "\t---Affichage des commandes du client d'ID " << id << " ---\n";
+    for(auto& i : m_orders)
+        if( i->getClient()->getId() == id)
+            std::cout << *i << std::endl;
+}
+
+void Magasin::affichageCommandesClient(std::string prenom, std::string nom){
+    std::cout << "\t---Affichage des commandes du client " << prenom << " "<< nom << " ---\n";
+    for(auto& i : m_orders)
+        if( i->getClient()->getPrenom() == prenom && i->getClient()->getNom() == nom)
+            std::cout << *i << std::endl;
 }
