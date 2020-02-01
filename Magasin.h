@@ -52,6 +52,10 @@ public:
 	void updateProductQuantityClient(std::string titre, int quantite, int id);
 	void updateProductQuantityClient(std::string titre, int quantite, std::string prenom, std::string nom);
 
+	//méthodes validation commande
+	bool validationCommande(Client& client);
+	bool validationCommande(std::string prenom, std::string nom);
+	bool validationCommande(int id);
 
 private:
 	std::vector <Product* > m_products;

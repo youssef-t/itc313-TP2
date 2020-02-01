@@ -234,4 +234,82 @@ void Magasin::updateProductQuantityClient(std::string titre, int quantite, std::
         }  
 }
 
+//Méthodes validation commande
+bool Magasin::validationCommande(Client& client){
+    bool valide = true ;
+    for(auto& i:client.getPanier())
+        for(auto& j:m_products)
+            if(i.getTitre() == j->getTitre())
+                if( i.getQuantite() >= j->getQuantite()){ //la quantité du produit dans le panier est supérieur
+                    valide = false;                       //à la quantité disponible dans le magasin
+                    std::cout << "Erreur: la quantité disponible du produit -- " 
+                              << i.getTitre() << " -- est : " << j->getQuantite();
+                    }                                     
 
+    if(valide)
+        std::cout << "Commande validée" << std::endl;
+    else
+        std::cout << "Commande non validée" << std::endl;
+    
+    return valide;
+}
+
+//On procède presque de la même manière
+bool Magasin::validationCommande(std::string prenom, std::string nom){
+    bool valide = true ;
+    Client* client;
+    bool client_trouve = false;
+    //vérification de l'existance du client
+    for(auto&i : m_clients)
+        if(i->getPrenom() == prenom && i -> getNom() == nom ){
+            client = i;
+            client_trouve = true ;
+            break;
+        }
+
+    if(client_trouve)
+    for(auto& i:client -> getPanier())
+        for(auto& j:m_products)
+            if(i.getTitre() == j->getTitre())
+                if( i.getQuantite() >= j->getQuantite()){ //la quantité du produit dans le panier est supérieur
+                    valide = false;                       //à la quantité disponible dans le magasin
+                    std::cout << "Erreur: la quantité disponible du produit -- " 
+                              << i.getTitre() << " -- est : " << j->getQuantite();
+                    }                                     
+
+    if(valide)
+        std::cout << "Commande validée" << std::endl;
+    else if(!client_trouve)
+        std::cout << "Commande non validée, client introuvable" << std::endl;
+    
+    return valide;
+}
+bool Magasin::validationCommande(int id){
+    bool valide = true ;
+    Client* client;
+    bool client_trouve = false;
+    //vérification de l'existance du client
+    for(auto&i : m_clients)
+        if(i->getId() == id ){
+            client = i;
+            client_trouve = true ;
+            break;
+        }
+
+
+    for(auto& i:client->getPanier())
+        for(auto& j:m_products)
+            if(i.getTitre() == j->getTitre())
+                if( i.getQuantite() >= j->getQuantite()){ //la quantité du produit dans le panier est supérieur
+                    valide = false;                       //à la quantité disponible dans le magasin
+                    std::cout << "Erreur: la quantité disponible du produit -- " 
+                              << i.getTitre() << " -- est : " << j->getQuantite();
+                    }                                     
+
+    if(valide)
+        std::cout << "Commande validée" << std::endl;
+    else if(!client_trouve)
+        std::cout << "Commande non validée, client introuvable" << std::endl;
+    
+    return valide;
+}
