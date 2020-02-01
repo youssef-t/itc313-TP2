@@ -4,3 +4,7 @@
 *-test
 a.out
 test.cpp
+Makefile.client.txt
+.idea
+.vscode
+

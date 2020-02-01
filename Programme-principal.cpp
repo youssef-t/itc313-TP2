@@ -541,5 +541,19 @@ void Programme::choixGestionCommandes(char help){
             m_magasin.affichageCommandesClient(prenom,nom);
         }   
     }
+}
+
+
+//Ecrire les commandes dans un fichier
+void Programme::writeOrders(){
+    std::ofstream monFlux("./Orders.txt");
+    if(monFlux){
+        for(auto& i : m_magasin.getOrders()){
+            monFlux << std::endl ;
+            monFlux << *i << std::endl;
+        }
+    }
+    else
+        std::cout << "Erreur: impossible d'ouvrir le fichier.\n";
 
 }
