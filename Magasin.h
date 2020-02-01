@@ -11,6 +11,12 @@ public:
 	Magasin(std::vector <Product>& products, std::vector <Client>& clients, std::vector <Commande>& orders);
 	//On peut pas mettre des valeurs par défaut pour les deux autres paramètres, donc on déclare ce constructeur
 	Magasin(std::vector <Product>& products);
+
+	//getters
+	std::vector <Product* > getProducts() const ;
+	std::vector <Client* > getClients() const ;
+	std::vector <Commande* > getOrders() const;
+
 	
 	//méthode ajout d'un produit en passant comme paramètre le "produit"
 	void addProduct(Product& produit);
@@ -72,6 +78,13 @@ public:
 
 	//méthode qui retourne un produit trouvé par son titre (dans m_products)
 	Product* productFind(std::string titre);
+
+	//méthode qui vérifie l'existance d'un client en utilisant son nom et prenom
+	bool clientExist(std::string prenom, std::string nom);
+
+	//méthode qui vérifie l'exisrtance d'un client en utilisant l'ID
+	bool clientExist(int id);
+
 
 private:
 	std::vector <Product* > m_products;

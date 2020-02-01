@@ -14,6 +14,7 @@
 
 class Programme{
 public:
+//La première méthode qui s'éxuctera lors du programme principal
     void choix(char help);
 
 private:

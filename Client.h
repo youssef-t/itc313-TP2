@@ -12,7 +12,7 @@ public:
                                                   //au dernier paramètre du deuxième constructeur
 
     //copy constructor
-    Client(Client &client);
+    Client(Client& client);
 
     //getters
     std::string getNom() const;

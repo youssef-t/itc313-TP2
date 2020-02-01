@@ -8,15 +8,15 @@
 
 int main(){
     Programme programme;
-    std::cout << "------Menu Principal------\n\n";
     char help = '9'; //on peut l'initialiser à n'importe quel caractère différent de 0, 
                     //voir ne pas l'initialiser
 
-    while(help != '0'){
+    while(help != '4'){
+        std::cout << "------MENU PRINCIPAL------\n";
         std::cout << "\t1) Gestion du magasin \n";
         std::cout << "\t2) Gestion des utilisateurs \n";
         std::cout << "\t3) Gestion des commandes \n";
-        std::cout << "\t0) Quitter le menu\n";
+        std::cout << "\t4) Quitter le menu\n";
 
         std::cin >> help;        
         programme.choix(help);

@@ -29,6 +29,11 @@ Magasin::Magasin(std::vector <Product>& products){
 
 }
 
+//getters
+std::vector <Product* > Magasin::getProducts() const { return m_products ;}
+std::vector <Client* > Magasin::getClients() const { return m_clients ;}
+std::vector <Commande* > Magasin::getOrders() const { return m_orders ;}
+
 //Ajout produit, client, ordre
 void Magasin::addProduct(Product& product){
     m_products.push_back(&product) ;
@@ -401,4 +406,22 @@ Product* Magasin::productFind(std::string titre){
             return i;
     //dans le cas où on trouve pas le produit correspondant
     return nullptr;
+}
+
+//méthode qui vérifie l'existance d'un client en utilisant son nom et prenom
+bool Magasin::clientExist(std::string prenom, std::string nom){
+    for(auto& i:m_clients)
+        if( i -> getPrenom() == prenom && i-> getNom() == nom)
+            return true ;//client trouvé
+
+    return false ;
+}
+
+//méthode qui vérifie l'exisrtance d'un client en utilisant l'ID
+bool Magasin::clientExist(int id){
+    for(auto& i:m_clients)
+        if( i-> getId() == id)
+            return true; //client trouvé
+    
+    return false;
 }
