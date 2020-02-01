@@ -67,6 +67,12 @@ public:
 	void affichageCommandesClient(int id);
 	void affichageCommandesClient(std::string prenom, std::string nom);
 
+	//méthode qui vérifie l'existance d'un produit en utilisant son titre
+	bool productExist(std::string titre);
+
+	//méthode qui retourne un produit trouvé par son titre (dans m_products)
+	Product* productFind(std::string titre);
+
 private:
 	std::vector <Product* > m_products;
 	std::vector <Client* > m_clients;

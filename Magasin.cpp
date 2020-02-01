@@ -387,3 +387,18 @@ void Magasin::affichageCommandesClient(std::string prenom, std::string nom){
         if( i->getClient()->getPrenom() == prenom && i->getClient()->getNom() == nom)
             std::cout << *i << std::endl;
 }
+
+bool Magasin::productExist(std::string titre){
+    for(auto&i : m_products)
+        if(i -> getTitre() == titre)
+            return true;
+    return false;
+}
+
+Product* Magasin::productFind(std::string titre){
+    for(auto&i : m_products)
+        if(i -> getTitre() == titre)
+            return i;
+    //dans le cas où on trouve pas le produit correspondant
+    return nullptr;
+}
