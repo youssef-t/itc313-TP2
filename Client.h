@@ -5,10 +5,14 @@
 
 class Client{
 public:
+    //constructors
     Client();
     Client(std::string prenom, std::string nom, std::vector<Product> panier);
     Client(std::string prenom, std::string nom) ; //on peut pas passer une valeur par défaut 
                                                   //au dernier paramètre du deuxième constructeur
+
+    //copy constructor
+    Client(Client &client);
 
     //getters
     std::string getNom() const;
@@ -17,7 +21,7 @@ public:
     std::vector<Product> getPanier() const;
 
     //Ajouter un produit au panier d'achat
-    void addProduct(Product produit);
+    void addProduct(Product produit , int quantite = 1);
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
     void updateQuantity(Product produit,int quantite);

@@ -6,24 +6,17 @@ int main(){
     Product ps3("PS3","Console de jeu", 5 , 999);
     Product mac("MacBook Pro","PC portable", 5 , 79);
     
-    std::vector<Product> produits_commandes = {mac,ps3,ps4};
-    std::vector<Product> panier ; //panier vide
+    //std::vector<Product> panier = {mac,ps3,ps4};
     
-    Client client("Jean","Claude",panier);
-    //par défaut les produits commandés sont de quantité 1
-    Commande commande(client, produits_commandes);       
+    Client client("Jean","Claude");
+    client.addProduct(ps4); //valeur par défaut : 1 ps4
+    client.addProduct(mac , 2 ); // 2 Mac ont été ajoutés au panier
+    
+    client.updateQuantity("PS4",2);
+    client.deleteProduct("MacBook Pro");
+
+    Commande commande(client);      
     std::cout<<commande << std::endl;
-
-    //Après modification des quantités de produits
-    produits_commandes.at(0).setQuantite(1);
-    produits_commandes.at(1).setQuantite(2);
-    produits_commandes.at(2).setQuantite(1);
-
-    commande.setProduct(produits_commandes);
-    std::cout << "Après changement des quantités des produits commandés\n";
-    std::cout << commande << std::endl;
-
-    
     
     return 0;
 }

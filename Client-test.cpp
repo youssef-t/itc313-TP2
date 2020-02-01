@@ -3,8 +3,8 @@
 
 int main(){
     Product ps4("PS4","Console de jeu", 5 , 299);
-    Product ps3("PS3","Console de jeu", 5 , 999);
-    Product mac("MacBook Pro","PC portable", 5 , 79);
+    Product ps3("PS3","Console de jeu", 5 , 249);
+    Product mac("MacBook Pro","PC portable", 5 , 999);
 
     std::vector<Product> panierA = {ps4};
 

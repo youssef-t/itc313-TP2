@@ -14,6 +14,15 @@
                     m_id = identifiant_auto_int();
         }
 
+    //copy constructor
+    Client::Client(Client& client) : m_prenom(client.getPrenom()), m_nom(client.getNom()) {
+        m_id = client.getId();
+
+        m_panier.reserve(client.getPanier().size());
+        for(auto& i : client.getPanier())
+            m_panier.push_back(i) ;
+    }
+
     //getters
     std::string Client::getNom() const{ return m_nom;}
     std::string Client::getPrenom() const{ return m_prenom;}
@@ -21,12 +30,13 @@
     std::vector<Product> Client::getPanier() const{return m_panier;}
 
     //Ajouter un produit au panier d'achat
-    void Client::addProduct(Product produit){
+    void Client::addProduct(Product produit , int quantite){
         //on a une copie du produit, le produit d'origine ne sera pas modifié
         //par défaut, le client prend un seul produit
-        produit.setQuantite(1);
+        produit.setQuantite(quantite);
         m_panier.push_back(produit);
     }
+    
 
     //Modifier la quantité d'un produit ajouté au panier d'achat
     void Client::updateQuantity(Product produit,int quantite){
