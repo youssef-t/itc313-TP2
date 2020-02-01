@@ -415,7 +415,7 @@ void Programme::gestionCommandes(){
     char help = '9';
     while( help != '5'){
         std::cout << "\n------Menu Gestion des Commandes------\n";
-        std::cout << "\t1) Ajout/validation d'une commade" << std::endl;
+        std::cout << "\t1) Ajout/validation d'une commande" << std::endl;
         std::cout << "\t2) Modifier le statut d'une commande" << std::endl;
         std::cout << "\t3) Afficher toutes les commandes de tous les clients" << std::endl;
         std::cout << "\t4) Afficher toutes les commandes d'un client" << std::endl;
@@ -433,7 +433,7 @@ void Programme::choixGestionCommandes(char help){
     //validation d'une commande
     if(help == '1'){
         std::cout << "\t1) Ajout/validation d'une commande d'un client en entrant son nom et prénom\n";
-        std::cout << "\t2) Ajout/validation d'une commande d'un client en entrant l'ID du client";
+        std::cout << "\t2) Ajout/validation d'une commande d'un client en entrant l'ID du client\n";
         char aide;
         std::cin >> aide ;
         
@@ -455,7 +455,7 @@ void Programme::choixGestionCommandes(char help){
                 std::cout << "Erreur: commande non validée, client introuvable.\n";      
         }
         //validation d'une commande en saisissant l'id du client
-        if(aide == '1'){
+        if(aide == '2'){
             std::cout <<"Saisir l'ID du client : ";
             int id;
             std::cin >> id;
