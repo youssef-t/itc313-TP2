@@ -12,7 +12,7 @@ int main(){
                     //voir ne pas l'initialiser
 
     while(help != '4'){
-        std::cout << "------MENU PRINCIPAL------\n";
+        std::cout << "\n------MENU PRINCIPAL------\n";
         std::cout << "\t1) Gestion du magasin \n";
         std::cout << "\t2) Gestion des utilisateurs \n";
         std::cout << "\t3) Gestion des commandes \n";

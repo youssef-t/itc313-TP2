@@ -1,0 +1,7 @@
+--------FICHIER DES CLIENTS--------
+
+
+ID(1) Bill	Gates
+ 	Panier:
+ 		PS3            Console de jeu                          (x1)         29 $
+

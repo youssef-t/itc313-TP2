@@ -19,7 +19,7 @@ void Programme::choix(char help){
 void Programme::gestionMagasin(){
     char help = '9';
     while (help != '5'){
-        std::cout << "------Menu Gestion du Magasin------\n";
+        std::cout << "\n------Menu Gestion du Magasin------\n";
         std::cout << "\t1) Ajout d'un produit ou des produits" << std::endl;
         std::cout << "\t2) Modification d'un produit" << std::endl;
         std::cout << "\t3) Affichage de tous les produits" << std::endl;
@@ -37,13 +37,20 @@ void Programme::choixGestionMagasin(char help){
         std::cout << "Saisir le nombre de produits que vous voulez saisir : ";
         std::cin >> nbr_produits ;
         ajoutProduit(nbr_produits);
+        writeProducts(); //écrire dans le fichier les nouveaux produits
     }
-    else if (help == '2')
+    else if (help == '2'){
         modificationProduit();
-    else if (help == '3')
+        writeProducts(); //mettre à jour le fichier après chaque modifications  
+    }   
+    else if (help == '3'){
         affichageProduits();
-    else if (help == '4')
-        affichageProduit();        
+        writeProducts(); //s'assurer que le contenu du fichier est à jour    
+    }
+    else if (help == '4'){
+        affichageProduit();   
+        writeProducts();  
+    }     
 }
 
 void Programme::ajoutProduit(int nbr_produits){
@@ -55,7 +62,7 @@ void Programme::ajoutProduit(int nbr_produits){
         std::getline(std::cin,titre);   //lire des chaines de caractères avec espaces
         std::cout << "Saisir la description du produit : ";
         std::string description;
-        std::cin.ignore();              
+        //std::cin.ignore();              
         std::getline(std::cin,description); 
         std::cout << "Saisir la quantite du produit : ";
         int quantite;
@@ -65,6 +72,7 @@ void Programme::ajoutProduit(int nbr_produits){
         std::cin >> prix ;
         
         m_magasin.addProductToStore(titre, description, quantite, prix);
+        writeProducts();
     }
 }
 
@@ -123,17 +131,18 @@ void Programme::modificationProduit(){
                 Product* produit = m_magasin.productFind(titre);
                 std::string description;
                 std::cout << "Entrer la nouvelle description du produit : " ;
-                std::cin.ignore();              
+                //std::cin.ignore();              
                 std::getline(std::cin,description); 
                 produit -> setDescription(description) ;
             }
             else 
                 std::cout << "Erreur: le produit n'a pas été trouvé dans le magasin. \n";            
         }
+        
         }
 
     }
-
+    writeProducts();
 }
 
 void Programme::affichageProduits(){
@@ -159,7 +168,7 @@ void Programme::affichageProduit(){
 void Programme::gestionUtilisateurs(){
     char help = '9';
     while( help != '6' ){
-        std::cout << "------Menu Gestion des Utilisateurs------\n";
+        std::cout << "\n------Menu Gestion des Utilisateurs------\n";
         std::cout << "\t1) Ajout d'un nouveau client" << std::endl;
         //std::cout << "\t2) Modification des données d'un client" << std::endl;
         std::cout << "\t2) Modifier le panier d'un client" << std::endl;
@@ -183,15 +192,16 @@ void Programme::choixGestionUtilisateurs(char help){
         std::getline(std::cin,prenom); 
         std::cout << "Saisir le nom du client : ";
         std::string nom;
-        std::cin.ignore();              
+        //std::cin.ignore();              
         std::getline(std::cin,nom); 
         m_magasin.addClient(prenom,nom);
+        writeClients(); //mettre à jour le fichier après chaque modifications  
     }
 
     //Modifier le panier d'un client
     else if(help == '2'){
         char aide = '4';
-        while(aide != 3){
+        while(aide != '3'){
             std::cout << "\t1) Modifier le panier d'un client en entrant son nom et son prénom\n";
             std::cout << "\t2) Modifier le panier d'un client en entrant son ID\n";
             std::cout << "\t3) Revenir au menu précédent\n";
@@ -207,7 +217,7 @@ void Programme::choixGestionUtilisateurs(char help){
 
                 std::cout << "Le nom du client : ";
                 std::string nom;
-                std::cin.ignore();              
+                //std::cin.ignore();              
                 std::getline(std::cin,nom);    
 
                 //Voir si le client existe
@@ -304,12 +314,14 @@ void Programme::choixGestionUtilisateurs(char help){
             }
 
         }
+        writeClients(); //mettre à jour le fichier après chaque modifications  
     }
 
     //Afficher tous les clients
     else if(help == '3'){
         std::cout << "\tAffichage de tous les clients\n";
         m_magasin.displayClients();
+        writeClients(); //s'assurer que le fichier est à jour
     }
 
     //Afficher un client
@@ -326,7 +338,7 @@ void Programme::choixGestionUtilisateurs(char help){
             std::getline(std::cin,prenom); 
             std::cout << "Saisir le nom du client : ";
             std::string nom;
-            std::cin.ignore();              
+            //std::cin.ignore();              
             std::getline(std::cin,nom); 
             //test l'existance du client
             if(m_magasin.clientExist(prenom,nom)){
@@ -346,6 +358,7 @@ void Programme::choixGestionUtilisateurs(char help){
                 m_magasin.displayClient(id);
             }  
         }
+        writeClients(); //s'assurer que le fichier est à jour    
 
     }   
 
@@ -363,7 +376,7 @@ void Programme::choixGestionUtilisateurs(char help){
             std::getline(std::cin,prenom); 
             std::cout << "Saisir le nom du client : ";
             std::string nom;
-            std::cin.ignore();              
+            //std::cin.ignore();              
             std::getline(std::cin,nom); 
             //test l'existance du client
             if(m_magasin.clientExist(prenom,nom)){
@@ -393,6 +406,7 @@ void Programme::choixGestionUtilisateurs(char help){
             }  
         }
     }
+    writeClients();
 }
 
 
@@ -400,7 +414,7 @@ void Programme::choixGestionUtilisateurs(char help){
 void Programme::gestionCommandes(){
     char help = '9';
     while( help != '5'){
-        std::cout << "------Menu Gestion des Commandes------\n";
+        std::cout << "\n------Menu Gestion des Commandes------\n";
         std::cout << "\t1) Ajout/validation d'une commade" << std::endl;
         std::cout << "\t2) Modifier le statut d'une commande" << std::endl;
         std::cout << "\t3) Afficher toutes les commandes de tous les clients" << std::endl;
@@ -408,8 +422,10 @@ void Programme::gestionCommandes(){
         std::cout << "\t5) Revenir au menu précédent" << std::endl;
 
         std::cin >> help;
-        if(help != '5')
+        if(help != '5'){
             choixGestionCommandes(help);
+            writeOrders();
+        }
     }  
 }
 
@@ -428,7 +444,7 @@ void Programme::choixGestionCommandes(char help){
             std::getline(std::cin,prenom); 
             std::cout <<"Saisir le nom du client : ";
             std::string nom;
-            std::cin.ignore();              
+            //std::cin.ignore();              
             std::getline(std::cin,nom); 
             
             if(m_magasin.clientExist(prenom, nom)){
@@ -452,6 +468,7 @@ void Programme::choixGestionCommandes(char help){
                 std::cout << "Erreur: commande non validée, client introuvable.\n";      
         }
         
+    writeOrders();
     }
     
     //modifier le statut d'une commande
@@ -474,6 +491,7 @@ void Programme::choixGestionCommandes(char help){
             status_int == 0 ? status = false : status = true ;
         
             m_magasin.updateCommandeStatus(id, status);
+            writeOrders();
         }
         //Modification du statut en utilisant le nom et le prénom
         if(aide == '2'){
@@ -484,7 +502,7 @@ void Programme::choixGestionCommandes(char help){
 
             std::cout << "Saisir le nom du client : ";
             std::string nom;
-            std::cin.ignore();              
+            //std::cin.ignore();              
             std::getline(std::cin,nom); 
 
             if(m_magasin.clientExist(prenom,nom)){
@@ -500,7 +518,8 @@ void Programme::choixGestionCommandes(char help){
             }
             else
                 std::cout << "Erreur: client introuvable.\n" ;
-        }        
+        }
+        writeOrders();        
     }
 
     //afficher toutes les commandes de tous les clients
@@ -536,7 +555,7 @@ void Programme::choixGestionCommandes(char help){
             std::getline(std::cin,prenom); 
             std::cout << "Saisir le nom du client : ";
             std::string nom;
-            std::cin.ignore();              
+            //std::cin.ignore();              
             std::getline(std::cin,nom); 
             m_magasin.affichageCommandesClient(prenom,nom);
         }   
@@ -548,6 +567,7 @@ void Programme::choixGestionCommandes(char help){
 void Programme::writeOrders(){
     std::ofstream monFlux("./Orders.txt");
     if(monFlux){
+        monFlux << "--------FICHIER DES COMMANDES--------\n\n";
         for(auto& i : m_magasin.getOrders()){
             monFlux << std::endl ;
             monFlux << *i << std::endl;
@@ -555,5 +575,33 @@ void Programme::writeOrders(){
     }
     else
         std::cout << "Erreur: impossible d'ouvrir le fichier.\n";
+}
 
+//Ecrire les client dans un fichier
+void Programme::writeClients(){
+    std::ofstream monFlux("./Clients.txt");
+    if(monFlux){
+        monFlux << "--------FICHIER DES CLIENTS--------\n\n";
+        for(auto& i : m_magasin.getClients()){
+            monFlux << std::endl;
+            monFlux << *i << std::endl;
+        }
+    }
+    else
+        std::cout << "Erreur: impossible d'ouvrir le fichiers.\n";
+}
+
+//Ecrire les client dans un fichier
+void Programme::writeProducts(){
+    std::ofstream monFlux("./Products.txt");
+    if(monFlux){
+        monFlux << "--------FICHIER DES PRODUITS--------\n\n";
+        for(auto& i : m_magasin.getProducts()){
+            monFlux << std::endl;
+            monFlux << *i << std::endl;
+        }
+    }
+    else
+        std::cout << "Erreur: impossible d'ouvrir le fichiers.\n";
+        
 }

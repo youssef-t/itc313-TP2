@@ -118,8 +118,8 @@ void Magasin::displayClients(){
     std::cout << "Identity\n";
 
     for(auto& i:m_clients){
-        std::cout << i->getId() << std::endl;
-        for(int j = 0 ; j < (int)std::to_string(i->getId()).length() - 3; j++)   
+        std::cout << i->getId() ;
+        for(int j = 0 ; j < 10 - (int)std::to_string(i->getId()).length() ; j++)   
             std::cout << " ";
         std::cout << i->getPrenom() << " " << i->getNom() << std::endl ;
     }
