@@ -250,6 +250,14 @@ bool Magasin::validationCommande(Client& client){
         Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
                                                     // dans le panier du client
         m_orders.push_back(commande); 
+        for(auto& i :client.getPanier()) //changer la quantité des produits disponibles après validation
+            for(auto& j: m_products)
+                if(i.getTitre() == j->getTitre()){
+                    int quantite_restee;
+                    quantite_restee = j->getQuantite() - i.getQuantite();
+                    j -> setQuantite(quantite_restee);
+                }
+
         std::cout << "Commande validée" << std::endl;
     }
 
@@ -283,9 +291,17 @@ bool Magasin::validationCommande(std::string prenom, std::string nom){
                     }                                     
 
     if(valide){
-        Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
+        Commande* commande = new Commande(*client); //les produits de la commande sont ceux qui sont
                                                     // dans le panier du client
-        m_orders.push_back(commande);         
+        m_orders.push_back(commande); 
+        for(auto& i :client->getPanier()) //changer la quantité des produits disponibles après validation
+            for(auto& j: m_products)
+                if(i.getTitre() == j->getTitre()){
+                    int quantite_restee;
+                    quantite_restee = j->getQuantite() - i.getQuantite();
+                    j -> setQuantite(quantite_restee);
+                }
+
         std::cout << "Commande validée" << std::endl;
     }
     else if(!client_trouve)
@@ -316,7 +332,7 @@ bool Magasin::validationCommande(int id){
                     }                                     
 
     if(valide){
-        Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
+        Commande* commande = new Commande(*client); //les produits de la commande sont ceux qui sont
                                                     // dans le panier du client
         m_orders.push_back(commande); 
         std::cout << "Commande validée" << std::endl;
