@@ -85,6 +85,9 @@ public:
 	//méthode qui vérifie l'exisrtance d'un client en utilisant l'ID
 	bool clientExist(int id);
 
+	//méthode qui retourne un client trouvé par son nom est prénom
+	Client* clientFind(std::string prenom , std::string nom);
+
 
 private:
 	std::vector <Product* > m_products;

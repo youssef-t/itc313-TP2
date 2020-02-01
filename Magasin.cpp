@@ -264,6 +264,7 @@ bool Magasin::validationCommande(Client& client){
                 }
 
         std::cout << "Commande validée" << std::endl;
+        client.viderPanier(); //après avoir validé la commande, le panier du client est vide
     }
 
     else
@@ -308,6 +309,7 @@ bool Magasin::validationCommande(std::string prenom, std::string nom){
                 }
 
         std::cout << "Commande validée" << std::endl;
+        client->viderPanier(); //après avoir validé la commande, le panier du client est vide
     }
     else if(!client_trouve)
         std::cout << "Commande non validée, client introuvable" << std::endl;
@@ -341,6 +343,7 @@ bool Magasin::validationCommande(int id){
                                                     // dans le panier du client
         m_orders.push_back(commande); 
         std::cout << "Commande validée" << std::endl;
+        client->viderPanier(); //après avoir validé la commande, le panier du client est vide
     }
     else if(!client_trouve)
         std::cout << "Commande non validée, client introuvable" << std::endl;
@@ -364,7 +367,7 @@ bool Magasin::updateCommandeStatus(int id , bool status){
     if(commande_trouvee)
         std::cout << "Mise à jour du statut de la commande réussie\n";
     else
-        std::cout << "Erreur: Mise à jour du statut de la commande échouée\n";
+        std::cout << "Erreur: Mise à jour du statut de la commande échouée (commande introuvable)\n";
 
     return commande_trouvee ;   
 }
@@ -424,4 +427,18 @@ bool Magasin::clientExist(int id){
             return true; //client trouvé
     
     return false;
+}
+
+//méthode qui retourne un client trouvé par son nom est prénom
+Client* Magasin::clientFind(std::string prenom , std::string nom){
+    if(clientExist(prenom,nom)){
+        for(auto& i:m_clients)
+            if( i -> getPrenom() == prenom && i-> getNom() == nom)
+                return i ;//client trouvé   
+    } 
+    
+    else
+        std::cout << "Erreur: client introuvable\n";
+    
+    return nullptr;
 }
