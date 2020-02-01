@@ -57,6 +57,9 @@ public:
 	bool validationCommande(std::string prenom, std::string nom);
 	bool validationCommande(int id);
 
+	//méthode mise à jour du statut de la commande
+	bool updateCommandeStatus(int id);
+
 private:
 	std::vector <Product* > m_products;
 	std::vector <Client* > m_clients;

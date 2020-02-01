@@ -264,7 +264,7 @@ bool Magasin::validationCommande(std::string prenom, std::string nom){
         if(i->getPrenom() == prenom && i -> getNom() == nom ){
             client = i;
             client_trouve = true ;
-            break;
+            break; //client a déjà été trouvé, on peut arrêter la boucle
         }
 
     if(client_trouve)
@@ -293,7 +293,7 @@ bool Magasin::validationCommande(int id){
         if(i->getId() == id ){
             client = i;
             client_trouve = true ;
-            break;
+            break; //client a déjà été trouvé, on peut arrêter la boucle
         }
 
 
@@ -312,4 +312,25 @@ bool Magasin::validationCommande(int id){
         std::cout << "Commande non validée, client introuvable" << std::endl;
     
     return valide;
+}
+
+
+//méthode mise à jour du statut de la commande
+bool Magasin::updateCommandeStatus(int id , bool status){
+    //trouver la commande en se servant de son id
+    bool commande_trouvee = false;
+
+    for(auto&i : m_orders)
+        if(i->getId() == id ){
+            i -> setLivraison(status); // mettre à jour le status de la commande
+            commande_trouvee = true ;
+            break; //on peut arrêter la boucle
+        }    
+    
+    if(commande_trouvee)
+        std::cout << "Mise à jour du statut de la commande réussie\n";
+    else
+        std::cout << "Erreur: Mise à jour du statut de la commande échouée\n";
+
+    return commande_trouvee ;   
 }
