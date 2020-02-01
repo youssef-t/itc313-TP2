@@ -246,8 +246,13 @@ bool Magasin::validationCommande(Client& client){
                               << i.getTitre() << " -- est : " << j->getQuantite();
                     }                                     
 
-    if(valide)
+    if(valide){
+        Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
+                                                    // dans le panier du client
+        m_orders.push_back(commande); 
         std::cout << "Commande validée" << std::endl;
+    }
+
     else
         std::cout << "Commande non validée" << std::endl;
     
@@ -277,8 +282,12 @@ bool Magasin::validationCommande(std::string prenom, std::string nom){
                               << i.getTitre() << " -- est : " << j->getQuantite();
                     }                                     
 
-    if(valide)
+    if(valide){
+        Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
+                                                    // dans le panier du client
+        m_orders.push_back(commande);         
         std::cout << "Commande validée" << std::endl;
+    }
     else if(!client_trouve)
         std::cout << "Commande non validée, client introuvable" << std::endl;
     
@@ -306,8 +315,12 @@ bool Magasin::validationCommande(int id){
                               << i.getTitre() << " -- est : " << j->getQuantite();
                     }                                     
 
-    if(valide)
+    if(valide){
+        Commande* commande = new Commande(client); //les produits de la commande sont ceux qui sont
+                                                    // dans le panier du client
+        m_orders.push_back(commande); 
         std::cout << "Commande validée" << std::endl;
+    }
     else if(!client_trouve)
         std::cout << "Commande non validée, client introuvable" << std::endl;
     
